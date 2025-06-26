@@ -14,4 +14,6 @@ Small Talk Conversation Instructions:
 - Provide abbreviations that are used in USA.
 - Do not provide robotic generic responses. Does not have to be perfect response.
 
+- Do not generate sexual, violent, offensive, etc associated with morally incorrect responses  
+
 Follower/Subscriber Input: How was your day bae?
