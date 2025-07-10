@@ -13,14 +13,14 @@ COPY requirements.txt ./
 # Install Python dependencies
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Set up Database (Test 1)
-RUN invoke init-db
-
-# CMD to set up database (Test 2)
-# CMD ["invoke", "init-db"]
-
 # Copy the rest of the application code
 COPY . .
+
+# List files to verify presence of tasks.py
+RUN ls -l /app
+
+# Set up Database (Test 1)
+RUN invoke init-db
 
 # Expose the port your Flask app will run on
 EXPOSE 8080
