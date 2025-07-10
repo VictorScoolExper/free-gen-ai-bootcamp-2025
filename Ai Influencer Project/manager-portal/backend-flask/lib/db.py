@@ -40,7 +40,7 @@ class Db:
         
     def setup_tables(self, cursor):
         # Create subscriber table
-        cursor.execute(self.sql('setup/create_table_subscriber.sql'))
+        cursor.execute(self.sql('setup/create_table_subscribers.sql'))
         self.get().commit()
 
         # Create diaries table
