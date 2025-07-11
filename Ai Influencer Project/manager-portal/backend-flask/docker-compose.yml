@@ -1,0 +1,27 @@
+version: "3.8"
+services:
+  backend:
+    build: .
+    # Bind mount your Windows project folder into the container for live code updates
+    volumes:
+      - /mnt/c/Users/ai/Documents/GitHub/free-gen-ai-bootcamp-2025/Ai Influencer Project/manager-portal/backend-flask:/app
+    ports:
+      - "8080:8080"
+    # Starts the Flask app with built-in auto-reload (recommended for dev)
+    environment:
+      - FLASK_APP=app.py
+      - FLASK_ENV=development
+    command: ["flask", "run", "--host=0.0.0.0", "--port=8080"]
+
+  # One-off service to initialize the database
+  # IMPORTANT: This service will run every time you use 'podman compose up'.
+  # To avoid re-running it, only use it manually with:
+  #   podman compose run init-db
+  # This ensures the database is only initialized when you explicitly want it.
+  # You can comment out or remove this service if you don't want it to run with 'up'.
+  
+  #init-db:
+    #build: .
+    #volumes:
+      #- /mnt/c/Users/ai/Documents/GitHub/free-gen-ai-bootcamp-2025/Ai Influencer Project/manager-portal/backend-flask:/app
+    #command: ["invoke", "init-db"]

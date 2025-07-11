@@ -1,6 +1,6 @@
 import sqlite3
 import os
-### Runs in Terminal will be used later for somethime for migration.
+### Runs in Terminal will be used later for something for migration.
 def run_migrations():
     # Connect to the database
     db_path = os.path.join(os.path.dirname(__file__), 'something_DB_GOES_HERE.db')
