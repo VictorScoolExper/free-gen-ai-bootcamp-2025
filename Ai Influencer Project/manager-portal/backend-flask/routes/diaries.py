@@ -1,5 +1,6 @@
 from flask import request, jsonify
 from flask_cors import cross_origin
+from backend_lib.db import Db
 
 def load(app):
     @app.route('/diaries', methods=['GET'])

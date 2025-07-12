@@ -1,5 +1,5 @@
 from invoke import task
-from lib.db import db
+from backend_lib.db import db
 
 @task
 def init_db(c):

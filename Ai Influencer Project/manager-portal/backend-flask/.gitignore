@@ -7,22 +7,22 @@ __pycache__/
 # C extensions
 *.so
 
-**/*.pyc
-*.pyc
-
 # Distribution / packaging
 .Python
+env/
+venv/
 build/
 develop-eggs/
 dist/
 downloads/
 eggs/
 .eggs/
+lib/__pycache__
+__pycache__/
+lib64/
 parts/
 sdist/
 var/
-wheels/
-share/python-wheels/
 *.egg-info/
 .installed.cfg
 *.egg
@@ -48,7 +48,6 @@ htmlcov/
 nosetests.xml
 coverage.xml
 *.cover
-*.py,cover
 .hypothesis/
 .pytest_cache/
 cover/
@@ -163,18 +162,35 @@ dmypy.json
 # pytype static type analyzer
 .pytype/
 
-# Cython debug symbols
-cython_debug/
+# SQLite database
+*.db
 
-# PyCharm
-#  JetBrains specific template is maintained in a separate JetBrains.gitignore that can
-#  be found at https://github.com/github/gitignore/blob/main/Global/JetBrains.gitignore
-#  and can be added to the global gitignore or merged into this file.  For a more nuclear
-#  option (not recommended) you can uncomment the following to ignore the entire idea folder.
-#.idea/
+# Docker
+*.pid
+*.log
 
-# Ruff stuff:
-.ruff_cache/
+# Ignore local environment variables
+.env
+.env.*
 
-# PyPI configuration file
-.pypirc
+# Ignore OS files
+.DS_Store
+Thumbs.db
+
+# Ignore seed and test data
+seed/
+
+# Ignore compiled files
+*.pyo
+
+# Ignore migrations (if any)
+migrations/
+
+# Ignore coverage
+.coverage
+
+# Ignore backup files
+*~
+*.bak
+*.swp
+*.swo

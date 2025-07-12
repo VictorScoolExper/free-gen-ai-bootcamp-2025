@@ -2,15 +2,18 @@ version: "3.8"
 services:
   backend:
     build: .
-    # Bind mount your Windows project folder into the container for live code updates
+    # Bind mount your Windows project folder into the container for live code updates (for development)
     volumes:
       - /mnt/c/Users/ai/Documents/GitHub/free-gen-ai-bootcamp-2025/Ai Influencer Project/manager-portal/backend-flask:/app
+    # For Kubernetes, use a PersistentVolumeClaim or ConfigMap for code/config instead of a direct bind mount
+    # - mountPath: /app
     ports:
       - "8080:8080"
     # Starts the Flask app with built-in auto-reload (recommended for dev)
     environment:
       - FLASK_APP=app.py
       - FLASK_ENV=development
+      - FLASK_DEBUG=1
     command: ["flask", "run", "--host=0.0.0.0", "--port=8080"]
 
   # One-off service to initialize the database

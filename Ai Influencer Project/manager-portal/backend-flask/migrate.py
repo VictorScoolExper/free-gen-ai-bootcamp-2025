@@ -1,5 +1,6 @@
 import sqlite3
 import os
+from backend_lib.db import Db
 ### Runs in Terminal will be used later for something for migration.
 def run_migrations():
     # Connect to the database

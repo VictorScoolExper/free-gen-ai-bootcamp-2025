@@ -1,6 +1,7 @@
 from flask import jsonify
 from flask_cors import cross_origin
 from datetime import datetime, timedelta
+from backend_lib.db import Db
 
 def load(app):
     @app.route('/dashboard/recent-chats', methods=['GET'])
