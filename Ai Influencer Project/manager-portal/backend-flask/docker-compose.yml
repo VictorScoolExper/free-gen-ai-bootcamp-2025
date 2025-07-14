@@ -7,6 +7,7 @@ services:
       - /mnt/c/Users/ai/Documents/GitHub/free-gen-ai-bootcamp-2025/Ai Influencer Project/manager-portal/backend-flask:/app
     # For Kubernetes, use a PersistentVolumeClaim or ConfigMap for code/config instead of a direct bind mount
     # - mountPath: /app
+    # Add volume cheat for backend libraries used
     ports:
       - "8080:8080"
     # Starts the Flask app with built-in auto-reload (recommended for dev)
@@ -14,7 +15,7 @@ services:
       - FLASK_APP=app.py
       - FLASK_ENV=development
       - FLASK_DEBUG=1
-    command: ["flask", "run", "--host=0.0.0.0", "--port=8080"]
+    command: ["flask", "run", "--host=0.0.0.0", "--port=5000"]
 
   # One-off service to initialize the database
   # IMPORTANT: This service will run every time you use 'podman compose up'.

@@ -1,0 +1,60 @@
+version: "3.8"
+
+services:
+  # Backend Flask API
+  backend:
+    build: 
+      context: ./backend-flask
+      dockerfile: Dockerfile
+    container_name: ai-influencer-backend
+    ports:
+      - "5000:5000"
+    environment:
+      - FLASK_APP=app.py
+      - FLASK_ENV=development
+      - FLASK_DEBUG=1
+    volumes:
+      # Mount the database file for persistence
+      - ./backend-flask/ai_influencer.db:/app/ai_influencer.db
+      # Mount the source code for development (hot reload)
+      - ./backend-flask:/app
+    networks:
+      - ai-influencer-network
+    restart: unless-stopped
+
+  # Frontend React App
+  frontend:
+    build: 
+      context: ./frontend-react
+      dockerfile: Dockerfile
+    container_name: ai-influencer-frontend
+    ports:
+      - "3000:3000"
+    environment:
+      - REACT_APP_API_URL=http://localhost:5000
+    depends_on:
+      - backend
+    networks:
+      - ai-influencer-network
+    restart: unless-stopped
+
+  # Database initialization service (optional)
+  init-db:
+    build: 
+      context: ./backend-flask
+      dockerfile: Dockerfile
+    container_name: ai-influencer-init-db
+    volumes:
+      - ./backend-flask:/app
+    command: ["python", "migrate.py"]
+    networks:
+      - ai-influencer-network
+    profiles:
+      - init
+
+networks:
+  ai-influencer-network:
+    driver: bridge
+
+volumes:
+  ai_influencer_data: 

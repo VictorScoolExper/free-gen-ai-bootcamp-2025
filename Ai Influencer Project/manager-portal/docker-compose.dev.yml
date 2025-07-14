@@ -1,0 +1,54 @@
+version: "3.8"
+
+services:
+  # Backend Flask API (Development)
+  backend:
+    build: 
+      context: ./backend-flask
+      dockerfile: Dockerfile
+    container_name: ai-influencer-backend-dev
+    # Bind mount your Windows project folder into the container for live code updates (for development)
+    volumes:
+      - /mnt/c/Users/ai/Documents/GitHub/free-gen-ai-bootcamp-2025/Ai Influencer Project/manager-portal/backend-flask:/app
+    ports:
+      - "5000:5000"
+    # Starts the Flask app with built-in auto-reload (recommended for dev)
+    environment:
+      - FLASK_APP=app.py
+      - FLASK_ENV=development
+      - FLASK_DEBUG=1
+    command: ["flask", "run", "--host=0.0.0.0", "--port=5000", "--reload"]
+    networks:
+      - ai-influencer-network
+    restart: unless-stopped
+
+  # Frontend React App (Development)
+  frontend:
+    build: 
+      context: ./frontend-react
+      dockerfile: Dockerfile.dev
+    container_name: ai-influencer-frontend-dev
+    # Bind mount your Windows project folder into the container for live code updates (for development)
+    volumes:
+      - /mnt/c/Users/ai/Documents/GitHub/free-gen-ai-bootcamp-2025/Ai Influencer Project/manager-portal/frontend-react:/app
+      - /app/node_modules
+    ports:
+      - "3000:3000"
+    # Starts the React app with hot reload (recommended for dev)
+    environment:
+      - REACT_APP_API_URL=http://localhost:5000
+      - CHOKIDAR_USEPOLLING=true
+      - WATCHPACK_POLLING=true
+    command: ["npm", "start"]
+    # Enable hot reload and file watching
+    stdin_open: true
+    tty: true
+    depends_on:
+      - backend
+    networks:
+      - ai-influencer-network
+    restart: unless-stopped
+
+networks:
+  ai-influencer-network:
+    driver: bridge 

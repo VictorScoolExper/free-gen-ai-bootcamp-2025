@@ -1,0 +1,23 @@
+version: "3.8"
+services:
+  frontend:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    container_name: ai-influencer-frontend-dev
+    # Bind mount your Windows project folder into the container for live code updates (for development)
+    volumes:
+      - /mnt/c/Users/ai/Documents/GitHub/free-gen-ai-bootcamp-2025/Ai Influencer Project/manager-portal/frontend-react:/app
+      - /app/node_modules # "volume trick" to keep container's node_modules isolated from your host (so you don't get permission issues or OS mismatches).
+    ports:
+      - "3000:3000"
+    # Starts the React app with hot reload (recommended for dev)
+    environment:
+      - REACT_APP_API_URL=http://localhost:5000
+      - CHOKIDAR_USEPOLLING=true
+      - WATCHPACK_POLLING=true
+      - BROWSER=none
+    command: ["npm", "start"]
+    # Enable hot reload and file watching
+    stdin_open: true
+    tty: true 

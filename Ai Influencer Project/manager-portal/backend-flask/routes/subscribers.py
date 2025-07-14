@@ -31,9 +31,9 @@ def load(app):
         except Exception as e:
             return jsonify({'error': str(e)}), 500
 
-    @app.route('/subscribers/recent-activity', methods=['GET'])
-    @cross_origin()
-    def get_subscribers_recent_activity():
+    # @app.route('/subscribers/recent-activity', methods=['GET'])
+    # @cross_origin()
+    # def get_subscribers_recent_activity():
         try:
             cursor = app.db.cursor()
             cursor.execute('''
@@ -48,6 +48,8 @@ def load(app):
             rows = cursor.fetchall()
             columns = [desc[0] for desc in cursor.description]
             subscribers = [dict(zip(columns, row)) for row in rows]
+            if not subscribers:
+                return jsonify({'message': 'No messages'}), 200
             return jsonify(subscribers)
         except Exception as e:
             return jsonify({'error': str(e)}), 500
@@ -76,6 +78,23 @@ def load(app):
             ))
             app.db.commit()
             return jsonify({'message': 'Subscriber added successfully', 'subscriber_id': cursor.lastrowid}), 201
+        except Exception as e:
+            return jsonify({'error': str(e)}), 500
+
+    @app.route('/subscribers/<int:subscriber_id>', methods=['DELETE'])
+    @cross_origin()
+    def delete_subscriber(subscriber_id):
+        """
+        Delete a subscriber by ID. For testing purposes only.
+        """
+        try:
+            cursor = app.db.cursor()
+            cursor.execute('DELETE FROM subscribers WHERE id_sub = ?', (subscriber_id,))
+            app.db.commit()
+            if cursor.rowcount:
+                return jsonify({'message': f'Subscriber {subscriber_id} deleted successfully'}), 200
+            else:
+                return jsonify({'error': 'Subscriber not found'}), 404
         except Exception as e:
             return jsonify({'error': str(e)}), 500
 

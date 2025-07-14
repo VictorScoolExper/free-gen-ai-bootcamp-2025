@@ -23,7 +23,8 @@ RUN pip install --no-cache-dir -r requirements.txt
 # RUN invoke init-db
 
 # Expose the port your Flask app will run on
-EXPOSE 8080
+#EXPOSE 8080
+EXPOSE 5000
 
 # Set environment variable for Flask (for development)
 ENV FLASK_APP=app.py
@@ -33,7 +34,5 @@ ENV FLASK_ENV=development
 # ENV FLASK_ENV=production
 
 # Command to run the Flask application with built-in auto-reload (for dev)
-CMD ["flask", "run", "--host=0.0.0.0", "--port=8080"]
-
-# For production, you might want to use gunicorn instead:
-# CMD ["gunicorn", "-b", "0.0.0.0:8080", "app:app"]
+#CMD ["flask", "run", "--host=0.0.0.0", "--port=8080"]
+CMD ["flask", "run", "--host=0.0.0.0", "--port=5000"]

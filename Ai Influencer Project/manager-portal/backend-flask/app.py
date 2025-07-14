@@ -27,7 +27,11 @@ def create_app(test_config=None):
         }
     })
 
-    
+    # Temporary health check route for testing (can be deleted later)
+    @app.route("/", methods=["GET"])
+    def health_check():
+        return "OK", 200
+
     # Register teardown for closing DB connection
     @app.teardown_appcontext
     def close_db(exception):
@@ -46,8 +50,8 @@ def create_app(test_config=None):
 app = create_app()
 
 if __name__ == '__main__':
-    app.run( 
+    app.run(
         debug=True,
         use_reloader=True,
-        reloader_interval= 1
+        reloader_interval=1
     )
