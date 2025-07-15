@@ -9,7 +9,7 @@ services:
     # - mountPath: /app
     # Add volume cheat for backend libraries used
     ports:
-      - "8080:8080"
+      - "5000:5000"
     # Starts the Flask app with built-in auto-reload (recommended for dev)
     environment:
       - FLASK_APP=app.py

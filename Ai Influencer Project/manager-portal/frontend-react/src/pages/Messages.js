@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Send, Search, User } from 'lucide-react';
+import { Send, Search, User, MessageSquare } from 'lucide-react';
 import { format } from 'date-fns';
 import { messagesAPI, subscribersAPI } from '../services/api';
 import './Messages.css';

@@ -21,7 +21,8 @@ def create_app(test_config=None):
     # Enable CORS for localhost only with specific methods and headers
     CORS(app, resources={
         r"/*": {
-            "origins": ["http://localhost:8080", "http://127.0.0.1:8080"],
+            #"origins": ["http://localhost:3000", "http://127.0.0.1:3000"],
+            "origins": ["*"],
             "methods": ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
             "allow_headers": ["Content-Type", "Authorization"]
         }
